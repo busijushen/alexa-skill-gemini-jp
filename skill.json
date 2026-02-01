@@ -33,6 +33,11 @@
       "locales": {
         "en-US": {
           "name": "geminiChat"
+        },
+        "ja-JP": {
+          "name": "ジェミニ・アシスタント"
+          "summary": "Geminiに何でも質問できます。",
+          "description": "GoogleのAI「Gemini」と対話するためのスキルです。"
         }
       },
       "testingInstructions": "Sample Testing Instructions."
