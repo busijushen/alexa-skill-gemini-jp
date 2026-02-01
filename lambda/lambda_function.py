@@ -24,7 +24,8 @@ logger.setLevel(logging.INFO)
 
 GOOGLE_API_KEY = os.getenv('GOOGLE_API_KEY')
 # API endpoint URL
-url = "https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key={}".format(GOOGLE_API_KEY)
+# url = "https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key={}".format(GOOGLE_API_KEY)
+url = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key={}".format(GOOGLE_API_KEY)
 # Headers for the request
 headers = {
     'Content-Type': 'application/json',
@@ -48,7 +49,7 @@ class LaunchRequestHandler(AbstractRequestHandler):
 
     def handle(self, handler_input):
         # type: (HandlerInput) -> Response
-        data["contents"][0]["parts"][0]["text"] = "Hello! Respond in English clearly and do not be verbose. OK?"
+        data["contents"][0]["parts"][0]["text"] = "こんにちは！日本語ではっきりと答えてください。冗長にならないようにしてください。いいですか?"
         response = requests.post(url, json=data, headers=headers)
         if response.status_code == 200:
             response_data = response.json()
@@ -56,7 +57,7 @@ class LaunchRequestHandler(AbstractRequestHandler):
                 .get("content", {})
                 .get("parts", [{}])[0]
                 .get("text", "Text not found"))
-            speak_output = "Hello, I'm your Gemini Chat Bot. " + text + " How can I help you?"
+            speak_output = "こんにちは。私はあなたのジェミニ チャット ボットです。" + text + " どんな御用でしょうか?"
             response_text = {
                 "role": "model",
                 "parts": [{
@@ -107,7 +108,7 @@ class ChatIntentHandler(AbstractRequestHandler):
             }
             data["contents"].append(response_text)
         else:
-            speak_output = "I did not receive a response to your request"
+            speak_output = "リクエストに対する返答がありませんでした"
 
         return (
             handler_input.response_builder
@@ -148,7 +149,7 @@ class CatchAllExceptionHandler(AbstractExceptionHandler):
         # type: (HandlerInput, Exception) -> Response
         logger.error(exception, exc_info=True)
 
-        speak_output = "Sorry, I had trouble doing what you asked. Please try again."
+        speak_output = "申し訳ありませんが、ご要望に応えられませんでした。もう一度お試しください。"
 
         return (
             handler_input.response_builder
