@@ -1,7 +1,6 @@
 {
   "interactionModel": {
     "languageModel": {
-      "invocationName": "ジェミニ",
       "intents": [
         {
           "name": "AMAZON.CancelIntent",
@@ -20,28 +19,20 @@
           "samples": []
         },
         {
-          "name": "GeminiIntent",
           "slots": [
             {
-              "name": "searchQuery",
-              "type": "AMAZON.SearchQuery"
+              "name": "query",
+              "type": "AMAZON.Person"
             }
           ],
+          "name": "ChatIntent",
           "samples": [
-            "{searchQuery} について教えて",
-            "{searchQuery} って何",
-            "{searchQuery} を調べて",
-            "{searchQuery} とは何ですか",
-            "{searchQuery}",
-            "ジェミニに {searchQuery} を聞いて"
+            "{query}"
           ]
-        },
-        {
-          "name": "AMAZON.FallbackIntent",
-          "samples": []
         }
       ],
-      "types": []
+      "types": [],
+      "invocationName": "chat with gemini"
     }
   }
 }
