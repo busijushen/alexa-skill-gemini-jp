@@ -66,7 +66,7 @@ class LaunchRequestHandler(AbstractRequestHandler):
             }
             data["contents"].append(response_text)
         else:
-            speak_output = "Request error"
+            speak_output = "リクエストエラー"
             
         return (
             handler_input.response_builder
@@ -113,7 +113,7 @@ class ChatIntentHandler(AbstractRequestHandler):
         return (
             handler_input.response_builder
                 .speak(speak_output)
-                .ask("Any other questions?")
+                .ask("他に質問はありますか?")
                 .response
         )
 
@@ -127,7 +127,7 @@ class CancelOrStopIntentHandler(AbstractRequestHandler):
 
     def handle(self, handler_input):
         # type: (HandlerInput) -> Response
-        speak_output = "Goodbye!"
+        speak_output = "さよなら!"
 
         return (
             handler_input.response_builder
